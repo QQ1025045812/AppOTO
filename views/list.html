@@ -12,25 +12,25 @@
                 <tr>
                     <td>用户列表</td>
                     <td>
-                        <select name="" id="">
+                        <select  id="selectPerson" onchange="selectChange()">
                             <option value="">1</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>商家服务</td>
-                    <td><input type="text"></td>
+                    <td><input type="text" id="shopText"></td>
                 </tr>
                 <tr>
                     <td>发送内容</td>
-                    <td><input type="text"></td>
+                    <td><input type="text" id="sendTxt"></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="点单"></td>
+                    <td><input type="button" value="点单" onclick="sendMessage()"></td>
                 </tr>
                 <tr>
                     <td>收到的内容</td>
-                    <td><textarea name="" id="" cols="20" rows="5"></textarea></td>
+                    <td><textarea  id="receiveTxt" cols="20" rows="5"></textarea></td>
                 </tr>
             </table>
         </form>
@@ -39,7 +39,7 @@
         var services={};
         var params = getCookie(); //获取cookie中的参数
         socket.on('connect',function(){
-                console.log('连接成功');
+                console.log('有人通过socket连接进来...');
                 socket.send({cmd:"online",data:""});
         });
         function getCookie(){
@@ -50,6 +50,44 @@
                 result[cache[0].trim()]=cache[1].trim();
             });
             return result;
+        }
+        socket.on('message', function (data) {
+            console.log('收到消息:'+JSON.stringify(data));
+        switch (data.cmd) {
+            case "rec": //收到消息在页面展示
+                document.getElementById("receiveTxt").value = data.data;
+                break;
+            case "list":  //收到所有在线商家的消息， 然后把数据在页面进行绑定
+                    console.log(data.data);
+                var options = document.getElementById("selectPerson");
+                document.getElementById("selectPerson").options.length=0;
+                    for(var i in data.data)   {
+                        var opp = new Option(data.data[i],i );
+                        options.add(opp);
+                    }
+                    var id = document.getElementById("selectPerson").value;
+                    document.getElementById("shopText").value=services[id];
+                break;
+            case "online": //收到刚上线的商户通知，对页面进行数据添加
+                console.log(data);
+                var options = document.getElementById("selectPerson");
+                var opp = new Option(data.data.name,data.data.id );
+                options.add(opp);
+                services[data.data.id]=data.data.service;
+                break;
+            case "ok":
+                document.getElementById("receiveTxt").value = data.data;
+                break;
+       }
+});
+        function sendMessage(){
+            var data=document.getElementById("sendTxt").value;
+            var id = document.getElementById("selectPerson").value; // 选中值
+            socket.send({cmd:"chat",data:{id:id,message:data,tel:params.tel,name:params.name_u}});
+        }
+        function selectChange(){
+            var id = document.getElementById("selectPerson").value;
+            document.getElementById("shopText").value=services[id] ;
         }
     </script>
 </body>

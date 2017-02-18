@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>shop</title>
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
      <div id="shop">
@@ -25,5 +26,25 @@
             </tr>
          </table>
      </div>
+     <script>
+        var socket = io.connect();
+        socket.on('connect',function(){
+            console.log('连接成功');
+        });
+        socket.on('message', function (data) {
+            console.log('收到消息:'+JSON.stringify(data));
+            switch (data.cmd) {
+            case "rec":   //收到数据进行绑定
+                id=data.data.id;
+                document.getElementById("receiveTxt").value = data.data.message;
+                document.getElementById("addressText").value =data.data.tel;
+                document.getElementById("userText").value =data.data.name;
+                break;
+            }
+        });
+        function sendMessage(){
+            socket.send({cmd:"ok",data:{id:id,message:"接单成功！"}});
+        }
+     </script>
 </body>
 </html>
