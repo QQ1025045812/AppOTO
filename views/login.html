@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+    <form action="/login" method="post">
+        <div style="margin:240px auto">
+            <table border="1" align="center">
+                <tr>
+                    <td><label>用户名：</label><input id="userName" name="name" type="text" placeholder="用户名..."></td>
+                    <td><label>密码：</label><input type="text" name="pwd" id="pwd"></td>
+                </tr>
+                <tr style="text-align:center;">
+                    <td>用户类型:</td>
+                    <td>
+                        <select name="role" id="userType">
+                            <option value="1">商家用户</option>
+                            <option value="2">个人用户</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;"><input type="submit" value="登陆"></td>
+                    <td style="text-align:center;"><input type="button" value="取消"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:center;"><a href="#">用户注册</a></td>
+                    <td style="text-align:center;"><a href="#">商家注册</a></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <script>
+        
+    </script>
+</body>
+</html>

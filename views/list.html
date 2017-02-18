@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+<script src="/socket.io/socket.io.js"></script>
+<body>
+    <div id="allUsers" style="margin:100px auto;width:400px;">
+        <form action="">
+            <table border="1">
+                <tr>
+                    <td>用户列表</td>
+                    <td>
+                        <select name="" id="">
+                            <option value="">1</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>商家服务</td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>发送内容</td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="点单"></td>
+                </tr>
+                <tr>
+                    <td>收到的内容</td>
+                    <td><textarea name="" id="" cols="20" rows="5"></textarea></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script>
+        var services={};
+        var params = getCookie(); //获取cookie中的参数
+        socket.on('connect',function(){
+                console.log('连接成功');
+                socket.send({cmd:"online",data:""});
+        });
+        function getCookie(){
+            var result={};
+            var arr=document.cookie.split("");
+            app.map(function(a){
+                var cache=a.split('=');
+                result[cache[0].trim()]=cache[1].trim();
+            });
+            return result;
+        }
+    </script>
+</body>
+</html>

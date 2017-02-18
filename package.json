@@ -1,0 +1,28 @@
+{
+  "name": "oto",
+  "version": "1.0.0",
+  "description": "NodeJS、Express框架、socket.io",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QQ1025045812/AppOTO.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/QQ1025045812/AppOTO/issues"
+  },
+  "homepage": "https://github.com/QQ1025045812/AppOTO#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.6",
+    "express": "^4.14.1",
+    "morgan": "^1.8.1",
+    "serve-favicon": "^2.3.2",
+    "socket.io": "^1.7.3"
+  }
+}
