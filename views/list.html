@@ -13,7 +13,7 @@
                     <td>用户列表</td>
                     <td>
                         <select  id="selectPerson" onchange="selectChange()">
-                            <option value="">1</option>
+                            
                         </select>
                     </td>
                 </tr>
@@ -38,14 +38,16 @@
     <script>
         var services={};
         var params = getCookie(); //获取cookie中的参数
-        socket.on('connect',function(){
+        console.log(params)
+        var socket = io.connect('http://localhost');             
+        socket.on('connection',function(){
                 console.log('有人通过socket连接进来...');
-                socket.send({cmd:"online",data:""});
+                // socket.send({cmd:"online",data:""});
         });
         function getCookie(){
             var result={};
-            var arr=document.cookie.split("");
-            app.map(function(a){
+            var arr=document.cookie.split(";");
+            arr.map(function(a){
                 var cache=a.split('=');
                 result[cache[0].trim()]=cache[1].trim();
             });
