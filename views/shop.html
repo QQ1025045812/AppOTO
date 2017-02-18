@@ -18,7 +18,7 @@
             </tr>
             <tr>
                 <td>用户电话</td>
-                <td><input type="text" id="dressText"></td>
+                <td><input type="text" id="addressText"></td>
             </tr>
             <tr>
                 <td>收到的用户</td>
@@ -27,16 +27,17 @@
          </table>
      </div>
      <script>
-        var socket = io.connect();
+        var socket = io('http://localhost:8085');
         socket.on('connect',function(){
-            console.log('连接成功');
+            console.log('商家连接成功');
         });
         socket.on('message', function (data) {
             console.log('收到消息:'+JSON.stringify(data));
             switch (data.cmd) {
             case "rec":   //收到数据进行绑定
+            alert("jjjjjjjjj")
                 id=data.data.id;
-                document.getElementById("receiveTxt").value = data.data.message;
+                document.getElementById("receiveText").value = data.data.message;
                 document.getElementById("addressText").value =data.data.tel;
                 document.getElementById("userText").value =data.data.name;
                 break;

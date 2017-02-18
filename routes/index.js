@@ -15,10 +15,12 @@ var users=require('../user.json');
                 if(user && user.pwd_s==req.body.pwd && req.body.role == "1"){
                     res.cookie('name_s',name);
                     res.cookie('role',req.body.role);
+                    res.cookie('service',user.service);
                     res.redirect('/shop');//跳转商家页面
                 }else if(user&&user.pwd_u==req.body.pwd&& req.body.role=="2"){
                     res.cookie('name_u',name);
                     res.cookie('role',req.body.role);
+                    res.cookie('tel',user.tel);
                     res.redirect('/list');//跳转到用户页面
                 }else{
                     res.send("账号密码不匹配或者未选择正确角色，详细请联系管理管.....");
