@@ -67,8 +67,10 @@
                         options.add(opp);
                         services[i]=data.data.services[i];
                     }
-                    var id = document.getElementById("selectPerson").value;
-                    document.getElementById("shopText").value=services[id];
+                    if(services[id]){
+                         var id = document.getElementById("selectPerson").value;
+                         document.getElementById("shopText").value=services[id];
+                    }
                 break;
             case "online": //收到刚上线的商户通知，对页面进行数据添加
                 console.log(data);
